@@ -6,9 +6,8 @@ from aiogram.fsm.context import FSMContext
 
 from database.dbworker import get_user, add_user, add_user_pred
 from database.msg import REPLIES
-from loader import engine
-# , model
-# from scripts.predictor import recognize_picture
+from loader import engine, model
+from scripts.predictor import recognize_picture
 from states.states import Registration, Session, Login, Predict
 
 router = Router()
@@ -16,7 +15,6 @@ router = Router()
 
 @router.message(Command("start", "help"))
 async def cmd_help(message: types.Message):
-    print(message.from_user.id)
     await message.reply(REPLIES["help"])
 
 
@@ -116,8 +114,7 @@ async def predict_waiting_pic(message: types.Message, state: FSMContext, bot: Bo
         await bot.download(message.photo[-1], filename)
         await message.reply(REPLIES["is_predicting"])
 
-        # answer, probability = recognize_picture(filename, model)
-        answer, probability = 2, 1 
+        answer, probability = recognize_picture(filename, model)
         match answer:
             case 0:
                 await message.reply(REPLIES["is_bear"].format(
