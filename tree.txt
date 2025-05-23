@@ -1,0 +1,23 @@
+.
+├── app.py
+├── config.env
+├── data
+│   ├── content
+│   ├── train
+│   └── valid
+├── database
+│   ├── database.db
+│   ├── dbworker.py
+│   ├── models.py
+│   └── msg.py
+├── handlers
+│   ├── __init__.py
+│   └── default.py
+├── loader.py
+├── README.md
+├── requirements.txt
+├── scripts
+│   └── predictor.py
+├── states
+│   └── states.py
+└── tree.txt
